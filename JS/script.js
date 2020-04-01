@@ -1,12 +1,11 @@
+characterAmount = 0;
 var generateBtn = document.querySelector("#generate");
-function generatePassword() {
+function generatePassword(characterAmount) {
   var uppercase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
   var lowercase = "abcdefghijklmnopqrstuvwxyz";
   var numeric = "1234567890";
   var specialcharacters = "!@#$%^&*";
-
-  var characterAmount = prompt("How many characters do you want your password to contain?");
-    
+  
   var characterNumber = parseInt(characterAmount);
   var requestsUpper = confirm("Do you want uppercase letters?");
   var requestsLower = confirm("Do you want lowercase letters?");
@@ -31,10 +30,19 @@ function generatePassword() {
   }
   return emptyString;
 }
-function writePassword() {
-  var generatedPassword = generatePassword()
+function writePassword(characterAmount) {
+  var generatedPassword = generatePassword(characterAmount)
   var passwordText = document.querySelector("#password");
-  passwordText.value = generatedPassword;
+  passwordText.textContent = generatedPassword;
 }
-generateBtn.addEventListener("click", writePassword);
- 
+function characterVerify() {
+  var characterAmount = prompt("How many characters do you want your password to contain?");
+    if (characterAmount < 8 || characterAmount > 128){
+      alert("Character amount does not meet the specified criteria 8-128")
+  } else {
+    writePassword(characterAmount);
+  }
+  
+}
+generateBtn.addEventListener("click", characterVerify);
+
